@@ -15,6 +15,7 @@ export default class Home extends Component {
 	componentDidMount() {
 		setDailyNotification();
 	}
+
 	render() {
 		return (
 			<Provider store={createStore(reducer, applyMiddleware(thunk))}>

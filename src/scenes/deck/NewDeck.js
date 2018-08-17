@@ -10,7 +10,7 @@ class NewDeck extends PureComponent {
 	state = { input: "", buttonDisable: true };
 
 	setTitle(title) {
-		const noTitle = !!!title;
+		const noTitle = !!!title || /^\s/.test(title);
 		const hasExistingTitle = this.props.deckList.includes(title);
 		const buttonDisable = noTitle || hasExistingTitle;
 		this.setState({ input: title, buttonDisable });

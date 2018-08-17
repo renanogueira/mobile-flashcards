@@ -13,15 +13,17 @@ class NewCard extends PureComponent {
 	};
 
 	setQuestion(questionText) {
-		const noQuestion = !!!questionText;
-		const noAnswer = !!!this.state.answerText;
+		const noQuestion = !!!questionText || /^\s/.test(questionText);
+		const noAnswer =
+			!!!this.state.answerText || /^\s/.test(this.state.answerText);
 		const buttonDisable = noQuestion || noAnswer;
 		this.setState({ questionText, buttonDisable });
 	}
 
 	setAnswer(answerText) {
-		const noQuestion = !!!this.state.questionText;
-		const noAnswer = !!!answerText;
+		const noQuestion =
+			!!!this.state.questionText || /^\s/.test(this.state.questionText);
+		const noAnswer = !!!answerText || /^\s/.test(answerText);
 		const buttonDisable = noQuestion || noAnswer;
 		this.setState({ answerText, buttonDisable });
 	}
