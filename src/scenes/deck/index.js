@@ -5,8 +5,6 @@ import { Button, Text } from "native-base";
 import { FontAwesome } from "@expo/vector-icons";
 import { fetchDecks } from "../../actions";
 
-import { clearNotification, setNotification } from "../../utils";
-
 class Deck extends PureComponent {
 	static navigationOptions = ({ navigation }) => {
 		const { title } = navigation.state.params;
@@ -52,10 +50,7 @@ class Deck extends PureComponent {
 						</Button>
 					) : (
 						<Button
-							onPress={() => {
-								navigation.navigate("quiz", { title });
-								clearNotification().then(setNotification);
-							}}
+							onPress={() => navigation.navigate("quiz", { title })}
 							bordered
 							style={{
 								borderColor: "#d32f2f",
