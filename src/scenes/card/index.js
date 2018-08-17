@@ -27,11 +27,11 @@ class NewCard extends PureComponent {
 	}
 
 	saveToDeck() {
-		const { addCard, title, navigation, item, refresh } = this.props;
 		const { questionText, answerText } = this.state;
+		const { addCard, title, navigation, item } = this.props;
+
 		addCard(title, { question: questionText, answer: answerText }).then(() => {
 			this.setState({ questionText: "", answerText: "", buttonDisable: true });
-			refresh();
 			navigation.goBack();
 		});
 	}
@@ -81,9 +81,8 @@ class NewCard extends PureComponent {
 }
 
 function mapStateToProps(data, { navigation }) {
-	const { title, refresh } = navigation.state.params;
+	const { title } = navigation.state.params;
 	return {
-		refresh,
 		title,
 		item: data[title],
 		questionList: Object.keys(data[title].questions.map(item => item.question))

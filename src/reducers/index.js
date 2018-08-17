@@ -10,9 +10,11 @@ function flashcards(state = initialData, action) {
 			return { ...state, [title]: { title, questions: [] } };
 		}
 		case ADD_CARD: {
-			const stateCopy = { ...state };
-			stateCopy[action.title].questions.push(action.card);
-			return stateCopy;
+			const { title, card } = action;
+			return {
+				...state,
+				[title]: { title, questions: state[title].questions.concat(card) }
+			};
 		}
 		default:
 			return state;

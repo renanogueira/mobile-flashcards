@@ -1,6 +1,6 @@
 import * as Expo from "expo";
 import React, { Component } from "react";
-import App from "../";
+import Home from "../Home";
 
 export default class Setup extends Component {
 	state = { isReady: false };
@@ -19,6 +19,6 @@ export default class Setup extends Component {
 	}
 
 	render() {
-		return !this.state.isReady ? <Expo.AppLoading /> : <App />;
+		return !this.state.isReady ? <Expo.AppLoading /> : <Home />;
 	}
 }

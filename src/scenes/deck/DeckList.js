@@ -7,16 +7,23 @@ import { fetchDecks } from "../../actions";
 import DeckListItem from "../../components/DeckListItem";
 
 class DeckList extends PureComponent {
+	state = { decks: [] };
+
 	componentDidMount() {
 		this.props.getDecks();
 	}
 
+	componentWillReceiveProps(nextProps) {
+		this.setState({ decks: nextProps.decks });
+	}
+
 	render() {
 		const navigation = this.props.navigation;
+		const { decks } = this.state;
 		return (
 			<View style={{ paddingTop: Constants.statusBarHeight }}>
 				<FlatList
-					data={this.props.decks}
+					data={decks}
 					keyExtractor={(item, index) => index.toString()}
 					renderItem={({ item }) => (
 						<DeckListItem navigation={navigation} item={item} />

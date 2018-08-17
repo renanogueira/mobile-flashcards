@@ -3,14 +3,11 @@ import { View } from "react-native";
 import { connect } from "react-redux";
 import { Button, Text } from "native-base";
 import { FontAwesome } from "@expo/vector-icons";
+import { fetchDecks } from "../../actions";
 
 import { clearNotification, setNotification } from "../../utils";
 
 class Deck extends PureComponent {
-	refresh() {
-		this.setState({});
-	}
-
 	static navigationOptions = ({ navigation }) => {
 		const { title } = navigation.state.params;
 		return { title };
@@ -35,12 +32,7 @@ class Deck extends PureComponent {
 				</View>
 				<View style={{ justifyContent: "center" }}>
 					<Button
-						onPress={() =>
-							navigation.navigate("newCard", {
-								title,
-								refresh: this.refresh.bind(this)
-							})
-						}
+						onPress={() => navigation.navigate("newCard", { title })}
 						bordered
 						style={{
 							borderColor: "#d32f2f",

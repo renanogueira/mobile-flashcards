@@ -12,6 +12,8 @@ import {
 	Icon
 } from "native-base";
 
+import ResultadoQuiz from "./ResultadoQuiz";
+
 const initialState = {
 	counter: 1,
 	questionIndex: 0,
@@ -68,7 +70,7 @@ class Quiz extends PureComponent {
 	}
 
 	handleRestart() {
-		this.setState({});
+		this.setState(initialState);
 	}
 
 	mostrarResposta() {
@@ -76,54 +78,6 @@ class Quiz extends PureComponent {
 			const showQuestion = !prevState.showQuestion;
 			return { showQuestion };
 		});
-	}
-
-	renderResultado() {
-		const { correta, errada } = this.state;
-		const { title } = this.props.navigation.state.params;
-		const score = ((correta / (correta + errada)) * 100).toFixed(0);
-		return (
-			<Content
-				padder
-				contentContainerStyle={{
-					flex: 1,
-					alignItems: "center",
-					justifyContent: "center"
-				}}>
-				<Text style={{ fontSize: 25, fontWeight: "bold" }}>
-					Sua pontuação é de {score}
-				</Text>
-				<Text>Correta: {correta}</Text>
-				<Text>Errada: {errada}</Text>
-				<Button
-					bordered
-					style={{
-						width: 300,
-						marginTop: 10,
-						marginBottom: 10,
-						justifyContent: "center",
-						marginLeft: 20,
-						marginRight: 20
-					}}
-					warning
-					onPress={() => this.setState(initialState)}>
-					<Text>Recomeçar quiz</Text>
-				</Button>
-				<Button
-					bordered
-					style={{
-						width: 300,
-						marginBottom: 10,
-						justifyContent: "center",
-						marginLeft: 20,
-						marginRight: 20
-					}}
-					error
-					onPress={() => this.props.navigation.goBack()}>
-					<Text>Voltar ao baralho</Text>
-				</Button>
-			</Content>
-		);
 	}
 
 	render() {
@@ -194,7 +148,12 @@ class Quiz extends PureComponent {
 				</View>
 			</Content>
 		) : (
-			this.renderResultado()
+			<ResultadoQuiz
+				correta={this.state.correta}
+				errada={this.state.errada}
+				reiniciar={this.handleRestart.bind(this)}
+				navigation={() => this.props.navigation.goBack()}
+			/>
 		);
 	}
 }

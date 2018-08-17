@@ -68,11 +68,11 @@ export const addCardToDeck = (title, card) => {
 		});
 };
 
-export function clearNotification() {
+export const clearNotification = () => {
 	return AsyncStorage.removeItem(NOTIFICATION_KEY).then(
 		Notifications.cancelAllScheduledNotificationsAsync
 	);
-}
+};
 
 export const setDailyNotification = () => {
 	AsyncStorage.getItem(NOTIFICATION_KEY)
@@ -99,11 +99,11 @@ export const setDailyNotification = () => {
 		});
 };
 
-function createNotification() {
+const createNotification = () => {
 	return {
 		title: "Hora de Quiz",
 		body: "Não se esqueça de realizar um quiz dos seus baralhos! :)",
 		ios: { sound: true },
 		android: { sound: true, priority: "high", sticky: false, vibrate: true }
 	};
-}
+};

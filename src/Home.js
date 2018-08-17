@@ -11,7 +11,7 @@ import reducer from "./reducers";
 import { setDailyNotification } from "./utils";
 import DeckListNavigation from "./components/DeckListNavigation";
 
-export default class App extends Component {
+export default class Home extends Component {
 	componentDidMount() {
 		setDailyNotification();
 	}
